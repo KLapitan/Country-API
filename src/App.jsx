@@ -1,10 +1,9 @@
+import LayoutPage from "./LayoutPage";
+
+
 const App = () => {
 return(
-
-<main>
-CHeck 123sadads
-
-</main>
+<LayoutPage/>
 
 )
 }
