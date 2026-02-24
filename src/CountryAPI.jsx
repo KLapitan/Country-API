@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { Suspense } from "react";
 import SearchCountry from "./SearchCountry";
+import RegionFilter from "./RegionFilter";
+
+import FilteredCountry from "./Filtered-Country";
+
+import CountryList from "./CountryList";
 
 const CountryAPI = () => {
+
+
 
 const [countryItems,setCountryItems] = useState([]);
 
@@ -12,22 +19,67 @@ const countryNames = countryItems?.name  ? Array.isArray(countryItems.name) ? co
  
 
 const [text,setText]=useState("");
+const [selectedRegion,setSelectedRegion]=useState("")
 
-const [filteredCountry,setFilteredCountry]=useState([])
+const [isSearched,setIsSearched]=useState(false)
 
-const [newList,setNewList]=useState(false)
+const [showFiltered,setShowFiltered]=useState(false)
 
 
 const handleInputChange = (e) => {
 setText(e.target.value)
 }
-const handleSearchCountry = (name) => {
+// const handleSearchCountry = (name) => {
 
-const queryCountry = name.toLowerCase()
-const findCountry = countryItems.filter(item => item.name.toLowerCase().includes(queryCountry))
-setFilteredCountry(findCountry)
-setNewList(true)
+// const queryCountry = name.toLowerCase()
+
+// const findCountry = countryItems.filter(item => item.name.toLowerCase().includes(queryCountry))
+// setSearchedCountry(findCountry)
+// setNewList(true)
+// }
+
+const handleSearchCountry = () => {
+setIsSearched(true)
+setShowFiltered(true)
 }
+
+
+
+// const handleFilteredRegion =(region) => {
+
+// const filterRegions = countryItems.filter((country) => country.region === region)
+// setFilteredRegion(filterRegions)
+
+// }
+
+// we make it as one because old to much flag and renders
+// we tried to use useMemo for just optimzing so it wil not recalculate if the data is same
+const filteredList  = useMemo ( () => {
+  return countryItems.filter((country) => {
+const regionFiltered = selectedRegion === "" || country.region === selectedRegion
+  if (!isSearched) return regionFiltered;
+
+  const query =text.toLowerCase();
+
+const countrySearched = country.name.toLowerCase().includes(query)
+
+return countrySearched && regionFiltered
+})
+
+
+},[countryItems, text, selectedRegion ,isSearched ])
+
+
+// const filteredList = countryItems.filter((country) => {
+// const regionFiltered = selectedRegion === "" || country.region === selectedRegion
+//   if (!isSearched) return regionFiltered;
+
+//   const query =text.toLowerCase();
+
+// const countrySearched = country.name.toLowerCase().includes(query)
+
+// return countrySearched && regionFiltered
+// })
 
 
 useEffect(() => {
@@ -69,77 +121,27 @@ console.table(countryNames)
 return(
 <section className="h-screen p-3 flex gap-2 flex-col ">
 
+<div className="flex flex-row justify-between border w-full border-pink-600 place-self-center">
 
 
 <SearchCountry text={text}  onSearch={handleSearchCountry}  onInput={handleInputChange}/>
 
+<RegionFilter selectedRegion={selectedRegion} onFilter={(region) => {setSelectedRegion(region);  setShowFiltered(true)}}/>
 
-  {/* list of countries */}
-
-  {newList ? (
-<ul className="border border-white w-full h-screen overflow-auto flex flex-row flex-wrap gap-15 items-center justify-center p-4">
-  {filteredCountry.map((item, index) => (
-    <li key={index} className="text-LDMWhite  shadow-lg h-80 w-72 font-Nunito ">
-
-            <img src={item.flags.png } className="h-40 w-full" alt={`flag of ${item.name}`} />
-
-
-            <div className=" bg-DMBlue-900 h-40 flex flex-col gap-5 p-4">
-              <h2 className="text-md font-bold">{item.name}</h2>
-              
-              <div>
-              <h3>Population: <span>{item.population ??"NA"}</span> </h3>
-              <h3>Region: <span>{item.region ??"NA"}</span></h3> 
-              <h3>Capital: <span>{item.capital ??"NA"}</span></h3> 
-              </div>
-            
-            </div>
-          
-              
-          
-
-          </li>
-  ))}
-
-</ul>
-
-
-
-
-  ) :(
-  
-  
+</div>
   
 
-  <ul className="border border-white w-full h-screen overflow-auto flex flex-row flex-wrap gap-15 items-center justify-center p-4 ">
-        {countryItems.map((country, index) => (
-          <li key={index} className="text-LDMWhite  shadow-lg h-80 w-72 font-Nunito ">
+{showFiltered ? (
 
-            <img src={country.flags.png } className="h-40 w-full" alt={`flag of ${country.name}`} />
+<FilteredCountry filteredList ={filteredList} />
+):(
 
+<CountryList  country={countryItems}/>
+)
 
-            <div className=" bg-DMBlue-900 h-40 flex flex-col gap-5 p-4">
-              <h2 className="text-md font-bold">{country.name}</h2>
-              
-              <div>
-              <h3>Population: <span>{country.population ??"NA"}</span> </h3>
-              <h3>Region: <span>{country.region ??"NA"}</span></h3> 
-              <h3>Capital: <span>{country.capital ??"NA"}</span></h3> 
-              </div>
-            
-            </div>
-          
-              
-          
-
-          </li>
-        ))}
-      </ul>
-    
+}
 
 
-
-  ) }
 
 
 
@@ -155,3 +157,14 @@ const Loading = () => {
 return <h2>LOADING DATA ....</h2>
 
 }
+
+
+
+
+
+
+
+
+
+
+

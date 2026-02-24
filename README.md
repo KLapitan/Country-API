@@ -1,25 +1,19 @@
-COUNTRY REST API
+COntry api
 
-using REST API IN FETCHING COUNTRY FOR THIS CHALLANGE
+<!-- feb 24  -->
 
-<!-- feb 23 -->
+done creating logic for dropdown
 
-done creating search input and connecting input and the list
+done creating logic for searched and filtered items
 
-done creating a search country logic that filter list to the searched items
+todo
 
-todos :
+when searching a country example Philippines
 
-create a drop ui
-asia
-america
-europe
+it will show the full details of that country
 
+and create a back button
 
+the themeswitcher
 
-filer items dropdown
-
-filter asian country
-filter europe country
-
-filter american countrty like that
+and the logo
