@@ -1,9 +1,12 @@
-const RegionFilter = ({onFilter,selectedRegion}) => {
+const FilterCountry = ({selectRegion,onFilter}) => {
+
+
+
 
 return(
-<div className="w-full x   items-center  lg:flex  justify-end hidden">
+<div className="w-full  items-center  lg:flex  justify-end hidden">
 
-<select name="Region"  className="mr-32 p-4  shadow-lg  rounded-lg"  onChange={(e) => onFilter(e.target.value) }  value={selectedRegion}>
+<select name="Region"  className="mr-32 p-4  shadow-lg  rounded-lg"  onChange={(e) => onFilter(e.target.value) }  value={selectRegion}>
  <option value="" disabled hidden className="shadow-lg text-DMBlue-900">Filter by Region</option>
   <option value="Africa">Africa</option>
   <option value="Americas">Americas</option>
@@ -13,10 +16,6 @@ return(
 
 </select>
 </div>
-
 )
-
-
 }
-
-export default RegionFilter
+export default FilterCountry

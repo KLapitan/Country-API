@@ -1,19 +1,28 @@
-import CountryAPI from "./CountryAPI"
-
+import CountryNav from "./CountryNav"
+import CountriesAPI from "./Countries-API";
+import { useState } from "react";
 
 const LayoutPage = () => {
 
-return(
+const [modeOn ,setModeOn] =useState(false)
+
+const handleModeOn = () => {
+setModeOn(prev => !prev)
+
+}
+return (
 <>
-<header>
+<nav className={`${modeOn ? "bg-DMBlue-950" : "bg-LDMWhite"} h-20 border border-green-500 z-10 w-full shadow-xl`}>
+<CountryNav onMode={handleModeOn}/>
+</nav>
+<main className={`${modeOn ? "bg-DMBlue-950" : "bg-LMGrey-50  "} h-auto w-full  border border-pink-800`}>
 
-</header>
+<CountriesAPI/>
 
-<main className="bg-DMBlue-950 h-screen w-full">
-
-<CountryAPI/>
 </main>
 
 </>
 )}
-export default LayoutPage
+
+
+export default LayoutPage;
