@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-rest-countries-api-with-color-theme-switcher-master
+rest-countries-api-with-color-theme-switcher-mastenv
+data.json
 dist
 dist-ssr
 *.local

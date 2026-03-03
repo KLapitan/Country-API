@@ -1,16 +1,19 @@
 import CountryInformation from "./CountryInfo"
+import { useCountryContext } from "./hooks/Country-Context"
 
 
-const FilteredCountryList = ({filteredItem,onCheck ,countryInfo,showInfo,countryItems}) => {
+const FilteredCountryList = () => {
+
+const {filteredItemList,handleDisplayInfo,showInfo}=useCountryContext();
 
 return(
-<section className="flex items-center justify-center">
+<section className="flex items-center justify-center ">
 {showInfo ? (
-  <CountryInformation  countryItems={countryItems} countryInfo={countryInfo}/>
+  <CountryInformation  />
 ) :(
-<ul className=" w-full h-screen overflow-auto flex flex-row flex-wrap gap-15 items-center justify-center p-4">
-  {filteredItem.map((item) => (
-    <li key={item.name} className="text-LDMWhite  shadow-lg h-80 w-72 font-Nunito scale-100 hover:shadow-2xl active:scale-104 cursor-pointer " onClick={() => onCheck(item)}>
+<ul className=" w-full h-auto overflow-auto flex flex-row flex-wrap gap-15 items-center justify-center p-4">
+  {filteredItemList.map((item) => (
+    <li key={item.name} className="text-LDMWhite  shadow-lg h-80 w-72 font-Nunito scale-100 hover:shadow-2xl active:scale-104 cursor-pointer " onClick={() => handleDisplayInfo(item)}>
 
             <img src={item.flags.png } className="h-40 w-full" alt={`flag of ${item.name}`} />
 

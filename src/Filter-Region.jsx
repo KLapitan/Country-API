@@ -1,6 +1,8 @@
-const FilterCountry = ({selectRegion,onFilter}) => {
+import { useCountryContext } from "./hooks/Country-Context"
 
+const FilterCountry = ({onFilter}) => {
 
+const {selectRegion}=useCountryContext()
 
 
 return(

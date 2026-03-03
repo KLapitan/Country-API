@@ -1,4 +1,8 @@
-const CountryNav = ({onMode}) => {
+import { useCountryContext } from "./hooks/Country-Context";
+
+const CountryNav = () => {
+const {handleModeOn}=useCountryContext()
+
 return(
 <section  className="flex  flex-row justify-between h-full items-center border border-green p-4">
 <div>
@@ -8,7 +12,7 @@ return(
 <div >
 
 
-<button  className="flex flex-row gap-2 bg-DMBlue-900" onClick={onMode}> 
+<button  className="flex flex-row gap-2 bg-DMBlue-900" onClick={handleModeOn}> 
 <img src="/dark-mode1.svg" className="w-5 h-5"/>
 Dark Mode
 </button>

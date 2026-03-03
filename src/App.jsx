@@ -1,10 +1,14 @@
 import LayoutPage from "./LayoutPage";
 // import CountriesAPI from "./Countries-API";
 
-const App = () => {
-return (
 
+import ContextProvider from "./hooks/Country-Context";
+const App = () => {
+
+return (
+<ContextProvider>
 <LayoutPage />
+</ContextProvider>
 
 )
 }
