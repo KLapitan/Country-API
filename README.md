@@ -1,19 +1,5 @@
-COntry api
+THis is a challange from frontEnd Mentor
 
-<!-- feb 24  -->
+Country API.
 
-done creating logic for dropdown
-
-done creating logic for searched and filtered items
-
-todo
-
-when searching a country example Philippines
-
-it will show the full details of that country
-
-and create a back button
-
-the themeswitcher
-
-and the logo
+where in we are given an data json .and fetch it to get the data.

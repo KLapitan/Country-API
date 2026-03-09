@@ -4,10 +4,10 @@ import { useCountryContext } from "./hooks/Country-Context"
 
 const FilteredCountryList = () => {
 
-const {filteredItemList,handleDisplayInfo,showInfo}=useCountryContext();
+const {modeOn,filteredItemList,handleDisplayInfo,showInfo}=useCountryContext();
 
 return(
-<section className="flex items-center justify-center ">
+<section className="flex items-center justify-center z-10 ">
 {showInfo ? (
   <CountryInformation  />
 ) :(
@@ -18,13 +18,13 @@ return(
             <img src={item.flags.png } className="h-40 w-full" alt={`flag of ${item.name}`} />
 
 
-            <div className=" bg-LDMWhite h-40 flex flex-col gap-5 p-4">
-              <h2 className="text-md font-bold text-LMGrey-950 hover:underline">{item.name}</h2>
+            <div className={` ${modeOn ? "bg-DMBlue-900": "bg-LDMWhite"} h-40 flex flex-col gap-5 p-4`}>
+              <h2 className={`text-md font-bold ${modeOn ? "text-LMGrey-50": "text-LMGrey-950"} hover:underline`}>{item.name}</h2>
               
                   <div>
-              <h3 className="text-LMGrey-950">Population: <span className="text-LMGrey-400">{item.population ??"NA"}</span> </h3>
-              <h3 className="text-LMGrey-950">Region: <span className="text-LMGrey-400">{item.region ??"NA"}</span></h3> 
-              <h3 className="text-LMGrey-950">Capital: <span className="text-LMGrey-400">{item.capital ??"NA"}</span></h3> 
+                  <h3 className={`${modeOn ? "text-LMGrey-50" : "text-LMGrey-950"} `}>Population: <span className={`${modeOn ? "text-LMGrey-50" :"text-LMGrey-400"}`}>{item.population ??"NA"}</span> </h3>
+              <h3 className={`${modeOn ? "text-LMGrey-50" : "text-LMGrey-950"}`}>Region: <span className={`${modeOn ? "text-LMGrey-50" :"text-LMGrey-400"}`}>{item.region ??"NA"}</span></h3> 
+              <h3 className={`${modeOn ? "text-LMGrey-50" : "text-LMGrey-950"} `}>Capital: <span className={`${modeOn ? "text-LMGrey-50" :"text-LMGrey-400"}`}>{item.capital ??"NA"}</span></h3> 
               </div>
             
             </div>
