@@ -8,7 +8,7 @@ const SearchCountry = () => {
 const {text , handleInputChange,handleSearch,modeOn} =useCountryContext()
 
 return (
-<div className="w-auto h-20  lg:ml-27">
+<div className="w-auto h-14   lg:ml-27">
 
 <div className={`${modeOn ?  "bg-DMBlue-900": "bg-LDMWhite"} w-auto relative`} >
 

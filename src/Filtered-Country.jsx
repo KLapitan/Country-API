@@ -7,13 +7,13 @@ const FilteredCountryList = () => {
 const {modeOn,filteredItemList,handleDisplayInfo,showInfo}=useCountryContext();
 
 return(
-<section className="flex items-center justify-center z-10 ">
+<section className={`${modeOn ?   "bg-DMBlue-950" : "bg-LDMWhite"} flex items-center justify-center h-screen overflow-hidden` }>
 {showInfo ? (
   <CountryInformation  />
 ) :(
-<ul className=" w-full h-auto overflow-auto flex flex-row flex-wrap gap-15 items-center justify-center p-4">
+<ul className="w-full h-full z-10  flex flex-row flex-wrap gap-15 items-center justify-center p-4">
   {filteredItemList.map((item) => (
-    <li key={item.name} className="text-LDMWhite  shadow-lg h-80 w-72 font-Nunito scale-100 hover:shadow-2xl active:scale-104 cursor-pointer " onClick={() => handleDisplayInfo(item)}>
+    <li key={item.name} className="text-LDMWhite  shadow-lg h-80  w-72 font-Nunito scale-100 hover:shadow-2xl active:scale-104 cursor-pointer " onClick={() => handleDisplayInfo(item)}>
 
             <img src={item.flags.png } className="h-40 w-full" alt={`flag of ${item.name}`} />
 
@@ -38,6 +38,8 @@ return(
 
 </ul>
 )}
+
+ 
 
 </section>
 )
